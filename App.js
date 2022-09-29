@@ -1,13 +1,28 @@
 import { StyleSheet, Text, View } from 'react-native'
-import NavigateBox from './components/NavigateBox'
+import { createStackNavigator } from '@react-navigation/stack'
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
+
+import Home from './screens/Home'
+import Notes from './screens/Notes'
+
 export default function App() {
+
+  const theme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: "transparent",
+    },
+  }
+
+  const Stack = createStackNavigator()
   return (
-    <View style={styles.container}>
-      <NavigateBox top={280} right={60} />
-      <NavigateBox top={280} right={180} />
-      <NavigateBox top={400} right={60} />
-      <NavigateBox top={400} right={180} />
-    </View>
+    <NavigationContainer theme={theme}>
+      <Stack.Navigator screenOptions={initialRouterName='Home'}>
+        <Stack.Screen name='Home' component={Home} />
+        <Stack.Screen name='Notes' component={Notes} />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
 
