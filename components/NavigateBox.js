@@ -1,9 +1,9 @@
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native"
 
-export default function NavigateBox({ right, top, handlePress }) {
+export default function NavigateBox({ handlePress }) {
   return (
     <TouchableOpacity
-      style={[styles.container, {right: right, top: top}]}
+      style={styles.container}
       activeOpacity={1}
       onPress={handlePress}  
     >
@@ -14,7 +14,6 @@ export default function NavigateBox({ right, top, handlePress }) {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
     backgroundColor: '#000000',
     margin: 20,
     borderRadius: 15,

@@ -33,32 +33,7 @@ const notes = [
   }
 ]
 
-const Item = ({ item, onPress, backgroundColor, textColor, height }) => (
-  <TouchableOpacity onPress={onPress} activeOpacity={1} style={[styles.note, backgroundColor, height]}>
-    <Image source={{uri: item.image}} style={styles.image} />
-    <Text style={[styles.title, textColor]}>{item.title}</Text>
-    {/* <Text>{note.description}</Text> */}
-  </TouchableOpacity>
-)
-
 export default function Notes() {
-
-  const [selectedItem, selectItem] = useState(null)
-
-  const renderItem = ({ item }) => {
-    const backgroundColor = item.id === selectedItem ? "#585859" : "#23272E";
-    const color = item.id === selectedItem ? 'black' : 'white'
-    const height = item.id === selectedItem ? 150 : 100
-    return (
-      <Item
-        item={item}
-        onPress={() => selectItem(item.id)}
-        backgroundColor={{ backgroundColor }}
-        textColor={{ color }}
-        height={{height}}
-      />
-    );
-  };
 
   return(
     <FlatList
@@ -66,14 +41,13 @@ export default function Notes() {
       style={styles.container}
       numColumns={2}
       columnWrapperStyle='wrap'
-      renderItem={renderItem}
-      // renderItem={(renderItem) => (
-      //   <View style={styles.note} key={note.id}>
-      //     <Image source={{uri: note.image}} style={styles.image} />
-      //     <Text style={styles.title}>{note.title}</Text>
-      //     <Text>{note.description}</Text>
-      //   </View>
-      // )}
+      renderItem={({item: note}) => (
+        <View style={styles.note} key={note.id}>
+          <Image source={{uri: note.image}} style={styles.image} />
+          <Text style={styles.title}>{note.title}</Text>
+          {/* <Text>{note.description}</Text> */}
+        </View>
+      )}
     />
   )
 }
@@ -89,7 +63,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     backgroundColor: '#23272E',
-    // marginTop: 10,
     padding: 15,
     borderRadius: 20,
     width: '50%',
