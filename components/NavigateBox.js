@@ -1,13 +1,13 @@
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native"
 
-export default function NavigateBox({ handlePress }) {
+export default function NavigateBox({ handlePress, BoxText}) {
   return (
     <TouchableOpacity
       style={styles.container}
       activeOpacity={1}
       onPress={handlePress}  
     >
-      <Text style={{color: '#fff', fontWeight: 'bold'}}>LOGO</Text>
+      <Text style={{color: '#fff', fontWeight: 'bold'}}>{BoxText !== undefined ? BoxText : ''}</Text>
     </TouchableOpacity>
   )
 }

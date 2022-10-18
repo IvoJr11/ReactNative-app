@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <View style={styles.container}>
       <View style={styles.boxes}>
-        <NavigateBox handlePress={() => navigator.navigate('Notes')} />
+        <NavigateBox BoxText='COMPS' handlePress={() => navigator.navigate('Notes')} />
         <NavigateBox />
         <NavigateBox />
         <NavigateBox />
