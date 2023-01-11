@@ -1,44 +1,41 @@
-import { StyleSheet, Text, View, useColorScheme } from 'react-native'
-import { createStackNavigator } from '@react-navigation/stack'
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native'
+import { StyleSheet, useColorScheme } from 'react-native'
+// import { createStackNavigator } from '@react-navigation/stack'
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native'
 import { StatusBar } from 'expo-status-bar'
-
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Home from './screens/Home'
-import Notes from './screens/Notes'
+import { themes } from './theme'
+import ThemeContext from './hooks/themeContext'
+import PinScreen from './screens/PinScreen'
+
+const initialRouterName = 'Home'
+
 
 export default function App() {
+  // const Stack = createStackNavigator()
+  const Tab = createBottomTabNavigator()
+  const colorScheme = useColorScheme()
 
   const theme = {
-    dark: false,
+    ...DefaultTheme,
     colors: {
-      primary: 'rgb(255, 45, 85)',
-      background: 'rgb(14, 18, 26)',
-      card: 'rgb(255, 255, 255)',
-      text: 'rgb(28, 28, 30)',
-      border: 'rgb(199, 199, 204)',
-      notification: 'rgb(255, 69, 58)',
+      ...DefaultTheme.colors,
+      background: colorScheme === 'dark' ? 'rgb(14, 18, 26)' : '#ECEDF1',
+      border: 'transparent',
+      text: colorScheme === 'dark' ? 'white' : 'black',
+      card: colorScheme === 'dark' ? '#171C26' : '#ECEDF1'
     }
   }
 
-  const Stack = createStackNavigator()
   return (
-    <NavigationContainer theme={theme}>
-      <Stack.Navigator screenOptions={initialRouterName='Home'}>
-        <Stack.Screen name='Home' component={Home} />
-        <Stack.Screen name='Notes' component={Notes} />
-      </Stack.Navigator>
-      <StatusBar></StatusBar>
-    </NavigationContainer>
+    <ThemeContext.Provider value={themes(colorScheme)}>
+      <NavigationContainer theme={theme}>
+        <Tab.Navigator initialRouteName='Home' screenOptions={{headerTitleAlign: 'center'}} >
+          <Tab.Screen options={{tabBarShowLabel: false}}  name='Home' component={Home} />
+          <Tab.Screen options={{tabBarItemStyle: {display: 'none'} , tabBarShowLabel: false}} name='PinScreen' component={PinScreen} />
+        </Tab.Navigator>
+        <StatusBar></StatusBar>
+      </NavigationContainer>
+    </ThemeContext.Provider>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexWrap: 'wrap',
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-  }
-})

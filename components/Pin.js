@@ -1,15 +1,23 @@
-import { Text, View, Image, StyleSheet } from 'react-native'
+import { useContext } from 'react'
+import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import GetImageRatio from '../hooks/useImageRatio'
+import ThemeContext from '../hooks/themeContext'
+import { useNavigation } from '@react-navigation/native'
 
 export default function Pin({image, title}) {
-
+  const navigator = useNavigation()
+  const theme = useContext(ThemeContext)
   const ratio = GetImageRatio(image)
 
+  const handlePress = () => {
+    navigator.navigate('PinScreen')
+  }
+
   return (
-    <View style={styles.note}>
+    <TouchableOpacity activeOpacity={1} onPress={handlePress} style={[styles.note, {backgroundColor: theme.pinBackground}]}>
       <Image source={{uri: image}} style={[styles.image, {aspectRatio: ratio}]} />
-      <Text style={styles.title}>{title}</Text>
-    </View>
+      <Text style={[styles.title, {color: theme.textPrimary}]}>{title}</Text>
+    </TouchableOpacity>
   )
 }
 
@@ -31,7 +39,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#fff',
-    fontSize: 18, 
+    fontSize: 17, 
     fontWeight: 'bold',
     marginTop: 10
   }

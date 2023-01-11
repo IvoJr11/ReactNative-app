@@ -1,5 +1,4 @@
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native"
-
 export default function NavigateBox({ handlePress, BoxText}) {
   return (
     <TouchableOpacity
