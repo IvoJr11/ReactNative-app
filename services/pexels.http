@@ -1,0 +1,2 @@
+curl -H "Authorization: 563492ad6f91700001000001b51079712d43487ebdc8ca5a92a0dd72" \
+"https://api.pexels.com/v1/search?query=football&page=1"

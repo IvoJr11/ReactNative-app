@@ -1,8 +1,10 @@
 import { useContext, useEffect } from 'react'
-import { StyleSheet } from "react-native"
+import { StyleSheet, View } from "react-native"
 import MasonryList from '@react-native-seoul/masonry-list'
 import Pin from "../components/Pin"
 import ThemeContext from '../hooks/themeContext'
+import { useNavigation } from '@react-navigation/native'
+import SearchBar from '../components/SearchBar'
 
 const notes = [
   {
@@ -65,13 +67,15 @@ const notes = [
 
 export default function Home() { 
   const theme = useContext(ThemeContext)
-
+  
   return(
-    <MasonryList 
-      data={notes}
-      renderItem={({item: note}) => <Pin image={note.image} title={note.title} />}
-      numColumns={2}
-    />
+    <View style={{width: '100%', height: '100%'}}>
+      <MasonryList        
+        data={notes}
+        renderItem={({item: note}) => <Pin image={note.image} title={note.title} />}
+        numColumns={2}
+      />
+    </View>
   )
 
 }

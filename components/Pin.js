@@ -16,7 +16,7 @@ export default function Pin({image, title}) {
   return (
     <TouchableOpacity activeOpacity={1} onPress={handlePress} style={[styles.note, {backgroundColor: theme.pinBackground}]}>
       <Image source={{uri: image}} style={[styles.image, {aspectRatio: ratio}]} />
-      <Text style={[styles.title, {color: theme.textPrimary}]}>{title}</Text>
+      <Text style={[styles.title, {color: theme.textPrimary}]} numberOfLines={3}>{title}</Text>
     </TouchableOpacity>
   )
 }
@@ -25,9 +25,7 @@ const styles = StyleSheet.create({
   note: {
     flex: 1,
     flexDirection: 'column',
-    alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#171C26',
     padding: 10,
     borderRadius: 20,
     marginHorizontal: 8,
@@ -39,8 +37,8 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#fff',
-    fontSize: 17, 
-    fontWeight: 'bold',
-    marginTop: 10
+    fontSize: 12, 
+    marginTop: 10,
+    marginLeft: 5
   }
 })
